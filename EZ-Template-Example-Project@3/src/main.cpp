@@ -11,7 +11,7 @@ ez::Drive chassis(
     {-1, -2, -3},     // Left Chassis Ports (negative port will reverse it!)
     {7, 6, 5},  // Right Chassis Ports (negative port will reverse it!)
 
-    10,      // IMU Port
+    19,      // IMU Port
     3.25,  // Wheel Diameter (Remember, 4" wheels without screw holes are actually 4.125!)
     450);   // Wheel RPM = cartridge * (motor gear / wheel gear)
 
@@ -261,6 +261,12 @@ void opcontrol() {
     if(master.get_digital(DIGITAL_L1)){
       mogo_mech.set(true);
     }
+
+    if(master.get_digital(DIGITAL_L2)){
+      mogo_mech.set(false);
+    }
+
+    
 
            // moveArmToPosition(9000);
 

@@ -31,10 +31,10 @@ const int SWING_SPEED = 110;
 void default_constants() {
   // P, I, D, and Start I
   // https://ez-robotics.github.io/EZ-Template/tutorials/tuning_constants
-  chassis.pid_drive_constants_set(20.0, 0.0, 100.0);         // Fwd/rev constants, used for odom and non odom motions
+  chassis.pid_drive_constants_set(19.65, 0.0, 100.0);         // Fwd/rev constants, used for odom and non odom motions
   chassis.pid_heading_constants_set(11.0, 0.0, 20.0);        // Holds the robot straight while going forward without odom
-  chassis.pid_turn_constants_set(3.0, 0.05, 20.0, 15.0);     // Turn in place constants
-  chassis.pid_swing_constants_set(6.0, 0.0, 65.0);           // Swing constants
+  chassis.pid_turn_constants_set(9.0, 0.05, 60.0, 15.0);     // Turn in place constants
+  chassis.pid_swing_constants_set(9.5, 0.0, 65.0);           // Swing constants
   /*chassis.pid_odom_angular_constants_set(6.5, 0.0, 52.5);    // Angular control for odom motions
   chassis.pid_odom_boomerang_constants_set(5.8, 0.0, 32.5);  // Angular control for boomerang motions*/
 
@@ -76,39 +76,44 @@ void drive_example() {
   // for slew, only enable it when the drive distance is greater than the slew distance + a few inches
 
 chassis.pid_drive_set(-0.8*tile_length,-120);
-chassis.pid_turn_set(29,60);
-  /*chassis.pid_wait();
-  chassis.pid_drive_set(-0.5*tile_length,60,true);
+chassis.pid_wait();
+chassis.pid_turn_set(-29_deg,60);
+chassis.pid_wait();
+  chassis.pid_drive_set(-0.53*tile_length,60,true);
   chassis.pid_wait();
   mogo_mech.set(true);
+  chassis.pid_wait();
 
 
-  intake_on();
+  intake_reverse();
   pros::delay(200);
-  chassis.pid_turn_set(148,60,true);
+  chassis.pid_turn_set(-100_deg,60,true);
   chassis.pid_wait();
   pros::delay(300);
 
-  intake_on();
-  chassis.pid_drive_set(0.92*tile_length,60,true);
+  intake_reverse();
+  chassis.pid_drive_set(0.8*tile_length,60,true);
   chassis.pid_wait();
-  chassis.pid_drive_set(-tile_length*0.25,70,true);
+  pros::delay(200);
+  chassis.pid_drive_set(-0.25*tile_length,70,true);
   chassis.pid_wait();
   pros::delay(500);
-  chassis.pid_turn_relative_set(-29.5,60,true);
+  chassis.pid_turn_relative_set(-76_deg,60,true);
   chassis.pid_wait();
-  chassis.pid_drive_set(0.4*tile_length,70,true);
+  intake_reverse();
+  chassis.pid_drive_set(0.485*tile_length,70,true);
   chassis.pid_wait();
   pros::delay(500);
   chassis.pid_drive_set(-tile_length*0.75,60,true);
   chassis.pid_wait();
   pros::delay(100);
-  chassis.pid_turn_relative_set(-48,70,true);
+  chassis.pid_turn_relative_set(21_deg,70,true);
   chassis.pid_wait();
-  chassis.pid_drive_set(0.7*tile_length,70,true);
+  intake_reverse();
+  chassis.pid_drive_set(0.93*tile_length,70,true);
   chassis.pid_wait();
 
-  pros::delay(750);
+  /*pros::delay(750);
   chassis.pid_drive_set(-tile_length*1.25,60,true);
   chassis.pid_wait();*/
 }
